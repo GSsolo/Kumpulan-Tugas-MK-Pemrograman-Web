@@ -48,6 +48,61 @@
             </ol>
         </section>
         <hr>
+        <section id="daftar-publikasi">
+            <h2>Daftar Publikasi Ilmiah</h2>
+            
+            <!-- Tabel Publikasi Kompleks -->
+            <table border="1">
+                <!-- thead: Bagian kepala tabel -->
+                <thead>
+                    <tr>
+                        <!-- colspan: menggabungkan 4 kolom menjadi 1 -->
+                        <th colspan="4" scope="colgroup">Rekapitulasi Publikasi Departemen Teknik Informatika</th>
+                    </tr>
+                    <tr>
+                        <!-- scope="col": mendefinisikan bahwa header ini berlaku untuk kolom di bawahnya -->
+                        <th scope="col">Tahun</th>
+                        <th scope="col">Judul Publikasi</th>
+                        <th scope="col">Jurnal / Konferensi</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                
+                <!-- tbody: Bagian isi data tabel -->
+                <tbody>
+                    <tr>
+                        <!-- rowspan: menggabungkan 2 baris ke bawah karena tahunnya sama -->
+                        <!-- scope="rowgroup": menandakan sel ini adalah header untuk sekelompok baris -->
+                        <th rowspan="2" scope="rowgroup">2026</th>
+                        <td>Implementasi Algoritma Deep Learning pada Pengenalan Pola Spasial</td>
+                        <td>IEEE Access</td>
+                        <td>Q1</td>
+                    </tr>
+                    <tr>
+                        <!-- Kolom tahun tidak perlu ditulis lagi karena sudah ter-cover rowspan dari baris atasnya -->
+                        <td>Optimasi Kinerja Basis Data Terdistribusi pada Sistem Skala Besar</td>
+                        <td>Journal of Software Engineering</td>
+                        <td>Q2</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2025</th>
+                        <td>Keamanan Protokol IoT pada Arsitektur Smart Home Cerdas</td>
+                        <td>International Conference on Cybernetics</td>
+                        <td>Terbit</td>
+                    </tr>
+                </tbody>
+
+                <!-- tfoot: Bagian kaki/ringkasan tabel -->
+                <tfoot>
+                    <tr>
+                        <!-- scope="row": header ini berlaku untuk baris ini saja -->
+                        <th scope="row" colspan="3">Total Publikasi yang Ditampilkan pada Tabel</th>
+                        <td>3 Publikasi</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        <hr>
     </main>
 
     <footer>
