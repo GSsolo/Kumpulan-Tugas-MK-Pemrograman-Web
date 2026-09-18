@@ -65,3 +65,16 @@ body {
     outline: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
+.card__description {
+    font-size: 0.95rem;
+    color: #4a5568; /* Warna default */
+    line-height: 1.6;
+}
+
+/* 4. MODIFIERS & SPECIFICITY */
+.card.card--featured .card__description {
+    color: #0056b3; 
+    font-weight: 500;
+    border-left: 4px solid #0056b3;
+    padding-left: 10px;
+}
