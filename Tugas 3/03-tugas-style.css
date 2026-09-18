@@ -52,3 +52,16 @@ body {
     height: auto;
     object-fit: cover;
 }
+.card__media-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.card__video, .card__audio {
+    width: 100%;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
