@@ -99,7 +99,7 @@ body {
 
 .card-text {
     color: #1B2632;
-    opacity: 0.85; /* Memberi efek muted text natural */
+    opacity: 0.85; 
 }
 
 .article-grid {
