@@ -13,7 +13,6 @@ body {
     line-height: 1.6;
 }
 
-/* --- Area Header Utama --- */
 .main-header {
     background-color: #A35139; /* Truffle Trouble */
     color: #EEE9DF; /* Palladian */
@@ -55,4 +54,19 @@ body {
 
 .main-nav__link:hover {
     color: #FFB162; /* Burning Flame */
+}
+
+.custom-sidebar-header {
+    background-color: #2C3B4D !important; /* Blue Fantastic */
+    color: #EEE9DF !important; /* Palladian */
+    border-bottom: none;
+}
+
+.journal-container {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 24px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 15px;
 }
