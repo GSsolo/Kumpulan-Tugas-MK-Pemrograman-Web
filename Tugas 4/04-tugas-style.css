@@ -139,3 +139,16 @@ body {
         gap: 10px;
     }
 }
+
+.active-filter {
+    color: #A35139 !important; /* Truffle Trouble */
+    font-weight: bold;
+}
+
+.inactive-filter {
+    color: #1B2632 !important; /* Abyssal Anchorfish Blue */
+}
+
+.inactive-filter:hover {
+    color: #FFB162 !important; /* Burning Flame */
+}

@@ -182,5 +182,38 @@
             </div>
         </aside>
     </main>
+    <!-- Script Logika Filter JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const filterLinks = document.querySelectorAll(".filter-link");
+            const articles = document.querySelectorAll(".article-card");
+
+            filterLinks.forEach(link => {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault(); 
+
+                    // Ubah class kustom agar palet warna JS selaras dengan CSS
+                    filterLinks.forEach(l => {
+                        l.classList.remove("active-filter");
+                        l.classList.add("inactive-filter");
+                    });
+                    
+                    this.classList.remove("inactive-filter");
+                    this.classList.add("active-filter");
+
+                    const selectedFilter = this.getAttribute("data-filter");
+
+                    articles.forEach(article => {
+                        const articleCategory = article.getAttribute("data-category");
+                        if (selectedFilter === "all" || selectedFilter === articleCategory) {
+                            article.style.display = "block";
+                        } else {
+                            article.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
