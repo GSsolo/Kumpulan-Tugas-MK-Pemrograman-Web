@@ -70,3 +70,40 @@ body {
     margin: 30px auto;
     padding: 0 15px;
 }
+
+.custom-section-title {
+    color: #A35139; /* Truffle Trouble */
+    border-bottom: 3px solid #C9C1B1 !important; /* Oatmeal */
+}
+
+.custom-card-title {
+    color: #1B2632; /* Abyssal Anchorfish Blue */
+}
+
+.custom-btn {
+    color: #A35139 !important; /* Truffle Trouble */
+    border: 1px solid #A35139 !important;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #A35139 !important; 
+    color: #EEE9DF !important; /* Palladian */
+}
+
+.custom-badge-1 { background-color: #A35139; color: #EEE9DF; } /* Truffle */
+.custom-badge-2 { background-color: #2C3B4D; color: #EEE9DF; } /* Blue Fantastic */
+.custom-badge-3 { background-color: #FFB162; color: #1B2632; } /* Burning Flame */
+.custom-badge-4 { background-color: #1B2632; color: #EEE9DF; } /* Abyssal */
+
+.card-text {
+    color: #1B2632;
+    opacity: 0.85; /* Memberi efek muted text natural */
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px;
+}
