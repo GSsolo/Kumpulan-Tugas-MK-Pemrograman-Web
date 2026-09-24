@@ -92,9 +92,40 @@ if (!isset($_SESSION['history'])) {
     </style>
 </head>
 <body>
-
+    
 <div class="container">
     <h2>Manajemen Keuangan Sederhana</h2>
+    
+    <!-- Menerapkan htmlspecialchars untuk mencegah XSS pada output -->
+    <div class="balance">
+        Saldo Saat Ini: Rp <?= htmlspecialchars(number_format($_SESSION['balance'], 2), ENT_QUOTES, 'UTF-8') ?>
+    </div>
+
+    <?php if ($message): ?>
+        <div class="alert">
+            <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
+        </div>
+    <?php endif; ?>
+
+    <form action="finance.php" method="POST">
+        <!-- Input Token CSRF tersembunyi -->
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8') ?>">
+        
+        <div>
+            <label for="type">Jenis Transaksi:</label><br>
+            <select name="type" id="type" required>
+                <option value="deposit">Deposit (Setor)</option>
+                <option value="withdraw">Withdraw (Tarik)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="amount">Jumlah (Desimal Positif):</label><br>
+            <input type="number" step="0.01" min="0.01" name="amount" id="amount" required>
+        </div>
+
+        <button type="submit">Proses Transaksi</button>
+    </form>
 </div>
 
 </body>
