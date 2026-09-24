@@ -13,6 +13,12 @@ if (!isset($_SESSION['history'])) {
     $_SESSION['history'] = [];
 }
 
+// Menghasilkan Token CSRF untuk keamanan formulir
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$message = '';
+
 // Memproses data jika ada metode POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 1. Validasi CSRF
@@ -175,6 +181,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Proses Transaksi</button>
     </form>
+
+    <h3>Riwayat Transaksi</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Waktu</th>
+                    <th>Tipe</th>
+                    <th>Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($_SESSION['history'])): ?>
+                    <tr><td colspan="4">Belum ada transaksi.</td></tr>
+                <?php else: ?>
+                    <!-- Menampilkan array history dengan perlindungan XSS penuh -->
+                    <?php foreach (array_reverse($_SESSION['history']) as $tx): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($tx['id'], ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($tx['time'], ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars(ucfirst($tx['type']), ENT_QUOTES, 'UTF-8') ?></td>
+                            <td>Rp <?= htmlspecialchars(number_format($tx['amount'], 2), ENT_QUOTES, 'UTF-8') ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 </body>
