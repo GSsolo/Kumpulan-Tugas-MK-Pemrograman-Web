@@ -12,6 +12,55 @@ if (!isset($_SESSION['balance'])) {
 if (!isset($_SESSION['history'])) {
     $_SESSION['history'] = [];
 }
+
+// Memproses data jika ada metode POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // 1. Validasi CSRF
+    $postedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'], $postedToken)) {
+        die('Aksi tidak sah: Token CSRF tidak valid.');
+    }
+
+    $rawType = $_POST['type'] ?? '';
+    $rawAmount = $_POST['amount'] ?? '';
+
+    // 2. Gunakan ekspresi match untuk mencocokkan dan memvalidasi jenis transaksi
+    $validatedType = match ($rawType) {
+        'deposit', 'withdraw' => $rawType,
+        default => null,
+    };
+
+    // 3. Validasi jumlah transaksi sebagai angka desimal positif
+    $isAmountValid = is_numeric($rawAmount) && (float)$rawAmount > 0;
+
+    if ($validatedType === null) {
+        $message = "Error: Jenis transaksi tidak valid.";
+    } elseif (!$isAmountValid) {
+        $message = "Error: Jumlah transaksi harus berupa angka desimal positif.";
+    } else {
+        // Data bersih, siap diproses
+        $amount = (float)$rawAmount;
+        $transactionId = uniqid('TXN-');
+
+        $transaction = new Transaction($transactionId, $validatedType, $amount);
+        
+        // Memproses transaksi dan mengubah saldo sesi
+        $isSuccess = $transaction->process($_SESSION['balance']);
+
+        if ($isSuccess) {
+            // Mencatat riwayat
+            $_SESSION['history'][] = [
+                'id' => $transaction->getId(),
+                'type' => $transaction->getType(),
+                'amount' => $transaction->getAmount(),
+                'time' => date('Y-m-d H:i:s')
+            ];
+            $message = "Sukses: Transaksi {$validatedType} sebesar Rp " . number_format($amount, 2) . " berhasil diproses.";
+        } else {
+            $message = "Gagal: Saldo tidak mencukupi untuk melakukan penarikan.";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +141,7 @@ if (!isset($_SESSION['history'])) {
     </style>
 </head>
 <body>
-    
+
 <div class="container">
     <h2>Manajemen Keuangan Sederhana</h2>
     
