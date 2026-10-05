@@ -1,7 +1,7 @@
 # Tugas Mandiri Modul 6: Perancangan ERD E-Library Kampus
 
 **Nama:** Muhammad Nur Ichsan Putra Adnan  
-**NIM:** D121241105  
+**NIM:** [Isi NIM Anda di sini]  
 **Mata Kuliah:** Pemrograman Web  
 
 ---
@@ -116,3 +116,44 @@ Menghilangkan *transitive dependency*. Atribut `Alamat_Penerbit` bergantung pada
 | `status` | ENUM | ('Dipinjam', 'Dikembalikan', 'Terlambat') |
 
 ---
+
+## 4. Visualisasi Relasi Kunci (ERD)
+
+Berikut adalah diagram relasi antar entitas menggunakan sintaks Mermaid:
+
+```mermaid
+erDiagram
+    MAHASISWA ||--o{ TRANSAKSI_PEMINJAMAN : "melakukan"
+    BUKU ||--o{ TRANSAKSI_PEMINJAMAN : "dipinjam dalam"
+    PENERBIT ||--o{ BUKU : "menerbitkan"
+
+    MAHASISWA {
+        int id_mahasiswa PK
+        varchar nim UK
+        varchar nama
+        varchar email
+        varchar jurusan
+    }
+    PENERBIT {
+        int id_penerbit PK
+        varchar nama_penerbit
+        varchar alamat
+        varchar telepon
+    }
+    BUKU {
+        int id_buku PK
+        varchar isbn UK
+        varchar judul
+        int tahun_terbit
+        int stok
+        int id_penerbit FK
+    }
+    TRANSAKSI_PEMINJAMAN {
+        int id_transaksi PK
+        int id_mahasiswa FK
+        int id_buku FK
+        date tanggal_pinjam
+        date tanggal_tenggat
+        date tanggal_kembali
+        enum status
+    }
